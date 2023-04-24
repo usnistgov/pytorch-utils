@@ -57,6 +57,7 @@ class ReduceLROnPlateau(torch.optim.lr_scheduler.ReduceLROnPlateau):
         self._last_lr = [group['lr'] for group in self.optimizer.param_groups]
 
     def is_done(self):
+        # function returns true when the model has converged, and training should terminate
         return self.num_lr_reductions > self.max_num_lr_reductions
 
     def step(self, metrics, epoch=None):
