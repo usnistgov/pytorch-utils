@@ -61,6 +61,7 @@ class ReduceLROnPlateau(torch.optim.lr_scheduler.ReduceLROnPlateau):
         return self.num_lr_reductions > self.max_num_lr_reductions
 
     def step(self, metrics, epoch=None):
+        # step the convergence tracking scheduler
         if self.mode not in ['min','max']:
             raise RuntimeError("Invalid mode: {}".format(self.mode))
         # convert `metrics` to float, in case it's a zero-dim Tensor
