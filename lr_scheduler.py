@@ -12,7 +12,7 @@ import torch.optim
 # LR scheduler which does early stopping and exponential decay
 
 
-class ReduceLROnPlateau(torch.optim.lr_scheduler.ReduceLROnPlateau):
+class EarlyStoppingReduceLROnPlateau(torch.optim.lr_scheduler.ReduceLROnPlateau):
     """
     Wrapper around torch.optim.lr_scheduler.ReduceLROnPlateau which exposes a subset of that classes parameters while additionally keeping track of the total number of learning rate reductions which have been applied.
     This class provides two additional callbacks (which must be functions), lr_reduction_callback which gets called when the learning rate is reduced due to the metric having plateaued, and termination_callback which is called when the metric has once again plateaued and the learning rate would have been reduced, but max_num_lr_reductions have already happened. So the scheduler should not reduce the learning rate any more. This is effectively a termination callback, letting the user know when the metric has stopped improving after n lr reductions.
